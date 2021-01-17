@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Acme.BookStore.Authors
 {
-    public interface IAuthorRepository : IRepository<Author, Guid>
+    public interface IAuthorRepositoryxx : IRepository<Author, Guid>
     {
         Task<Author> FindByNameAsync(string name);
 
