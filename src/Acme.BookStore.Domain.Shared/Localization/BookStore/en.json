@@ -43,7 +43,8 @@
     "Authors": "Authors",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
-    "NewAuthor": "New author"
+    "NewAuthor": "New author",
+    "BookStore:00002": "There is already an employee with the same name: {lastName}"
 
 
 

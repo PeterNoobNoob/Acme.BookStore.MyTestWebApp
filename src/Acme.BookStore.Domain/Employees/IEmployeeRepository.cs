@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.BookStore.Authors
+namespace Acme.BookStore.Employees
 {
-    public interface IAuthorRepository : IRepository<Author, Guid>
+    interface IEmployeeRepository : IRepository<Employee, Guid>
     {
-        Task<Author> FindByNameAsync(string lastName);
+        Task<Employee> FindByNameAsync(string lastName);
 
-        Task<List<Author>> GetListAsync(
+        Task<List<Employee>> GetListAsync(
             int skipCount,
             int maxResultCount,
             string sorting,
