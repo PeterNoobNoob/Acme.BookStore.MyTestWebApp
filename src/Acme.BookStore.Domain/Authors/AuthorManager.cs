@@ -8,9 +8,9 @@ namespace Acme.BookStore.Authors
 {
     public class AuthorManager : DomainService
     {
-        private readonly IAuthorRepositoryxx _authorRepository;
+        private readonly IAuthorRepository _authorRepository;
 
-        public AuthorManager(IAuthorRepositoryxx authorRepository)
+        public AuthorManager(IAuthorRepository authorRepository)
         {
             _authorRepository = authorRepository;
         }
