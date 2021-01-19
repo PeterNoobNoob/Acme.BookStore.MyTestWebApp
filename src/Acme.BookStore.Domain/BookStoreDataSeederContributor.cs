@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
+using Acme.BookStore.Employees;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
@@ -14,15 +15,19 @@ namespace Acme.BookStore
         private readonly IRepository<Book, Guid> _bookRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly AuthorManager _authorManager;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly EmployeeManager _employeeManager;
 
         public BookStoreDataSeederContributor(
             IRepository<Book, Guid> bookRepository,
             IAuthorRepository authorRepository,
-            AuthorManager authorManager)
+            AuthorManager authorManager,
+            EmployeeManager employeeManager)
         {
             _bookRepository = bookRepository;
             _authorRepository = authorRepository;
             _authorManager = authorManager;
+            _employeeManager = employeeManager;
         }
 
         public async Task SeedAsync(DataSeedContext context)
@@ -61,7 +66,8 @@ namespace Acme.BookStore
                         "George Orwell",
                         new DateTime(1903, 06, 25),
                         "Orwell produced literary criticism and poetry, fiction and polemical journalism; and is best known for the allegorical novella Animal Farm (1945) and the dystopian novel Nineteen Eighty-Four (1949)."
-                    )
+                    ),
+                    autoSave: true
                 );
 
                 await _authorRepository.InsertAsync(
@@ -69,7 +75,33 @@ namespace Acme.BookStore
                         "Douglas Adams",
                         new DateTime(1952, 03, 11),
                         "Douglas Adams was an English author, screenwriter, essayist, humorist, satirist and dramatist. Adams was an advocate for environmentalism and conservation, a lover of fast cars, technological innovation and the Apple Macintosh, and a self-proclaimed 'radical atheist'."
-                    )
+                    ),
+                    autoSave: true
+                );
+            }
+
+            // ADDED SEED DATA FOR EMPLOYEES 
+
+            if (await _employeeRepository.GetCountAsync() <= 0)
+            {
+                await _employeeRepository.InsertAsync(
+                    await _employeeManager.CreateAsync(
+                        "Jan",
+                        "Szyzslak",
+                        new DateTime(1952, 03, 11),
+                        "Sales"
+                        ),
+                    autoSave: true
+                );
+
+                await _employeeRepository.InsertAsync(
+                    await _employeeManager.CreateAsync(
+                        "Karel",
+                        "Novotny",
+                        new DateTime(1952, 03, 11),
+                        "Marketing"
+                        ),
+                    autoSave: true
                 );
             }
         }

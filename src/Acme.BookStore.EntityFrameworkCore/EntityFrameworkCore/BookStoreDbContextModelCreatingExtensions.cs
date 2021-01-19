@@ -1,5 +1,6 @@
 ﻿using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
+using Acme.BookStore.Employees;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -34,6 +35,20 @@ namespace Acme.BookStore.EntityFrameworkCore
                     .HasMaxLength(AuthorConsts.MaxNameLength);
 
                 b.HasIndex(x => x.Name);
+            });
+
+            builder.Entity<Employee>(b =>
+            {
+                b.ToTable(BookStoreConsts.DbTablePrefix + "Employees",
+                    BookStoreConsts.DbSchemaEmployee);
+
+                b.ConfigureByConvention();
+
+                b.Property(x => x.LastName)
+                    .IsRequired()
+                    .HasMaxLength(EmployeeConsts.MaxLastNameLength);
+
+                b.HasIndex(x => x.LastName);
             });
 
         }

@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Acme.BookStore.Employees
 {
-    interface IEmployeeRepository : IRepository<Employee, Guid>
+    public interface IEmployeeRepository : IRepository<Employee, Guid>
     {
         Task<Employee> FindByNameAsync(string lastName);
 

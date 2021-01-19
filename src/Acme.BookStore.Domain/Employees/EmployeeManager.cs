@@ -6,7 +6,7 @@ using Volo.Abp.Domain.Services;
 
 namespace Acme.BookStore.Employees
 {
-    class EmployeeManager : DomainService
+    public class EmployeeManager : DomainService
     {
         private readonly IEmployeeRepository _employeeRepository;
 
@@ -16,7 +16,7 @@ namespace Acme.BookStore.Employees
         }
 
         public async Task<Employee> CreateAsync(
-            [NotNull] string firstName,
+            string firstName,
             [NotNull] string lastName,
             DateTime hireDate,
             [CanBeNull] string companyRole = null)
@@ -53,8 +53,5 @@ namespace Acme.BookStore.Employees
 
             employee.ChangeName(newLastName);
         }
-    }
-}
-{
     }
 }

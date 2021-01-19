@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Acme.BookStore.Employees
 {
-    class Employee : FullAuditedAggregateRoot<Guid>
+    public class Employee : FullAuditedAggregateRoot<Guid>
     {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -19,7 +19,7 @@ namespace Acme.BookStore.Employees
 
     internal Employee(
         Guid id,
-        [NotNull] string firstName,
+        string firstName,
         [NotNull] string lastName,
         DateTime hireDate,
         [CanBeNull] string companyRole = null)
@@ -28,7 +28,7 @@ namespace Acme.BookStore.Employees
         SetName(lastName);
         FirstName = firstName;
         HireDate = hireDate;
-        CompanyRole = CompanyRole;
+        CompanyRole = companyRole;
     }
 
     internal Employee ChangeName([NotNull] string lastName)
@@ -42,7 +42,7 @@ namespace Acme.BookStore.Employees
         LastName = Check.NotNullOrWhiteSpace(
             lastName,
             nameof(lastName),
-            maxLength: EmployeeConsts.MaxFirstNameLength
+            maxLength: EmployeeConsts.MaxLastNameLength
             );
         }
     }
